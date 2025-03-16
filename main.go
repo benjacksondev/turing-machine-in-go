@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"time"
 )
 
@@ -56,20 +58,20 @@ func (tm *TuringMachine) PrintTape() {
 }
 
 func main() {
-	tape := []Symbol{"1", "1", "0", "0", " "} // 1101 in binary and 13 in decimal, everything up to " " is the input to the program
+	fmt.Println("Enter tape: ")
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Scan()
+	input := scanner.Text()
+
+	tape := make([]Symbol, len(input))
+	for i, char := range input {
+		tape[i] = Symbol(string(char))
+	}
+
 	tm := TuringMachine{
 		Tape:  tape,
 		Head:  0,
 		State: "Q",
-
-		// Q 0: □ → E
-		// Q 1: □ → O
-		// E 0: □ → E
-		// E 1: □ → O
-		// E □: 1 → F
-		// O 0: □ → E
-		// O 0: □ → E
-		// O □: 0 → F
 		Transitions: map[State]map[Symbol]Transition{
 			"Q": {
 				"0": {NextState: "E", Write: " ", Move: 1},
