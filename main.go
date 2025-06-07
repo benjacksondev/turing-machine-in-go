@@ -83,7 +83,7 @@ func main() {
 			// else the value on the tape is odd move to state O (for Odd)
 			// We don't need to write anything to the tape yet
 			"Q": {
-				"0": {NextState: "E", Write: " ", Move: 1}, // Q 0: □ → E
+				"0": {NextState: "E", Write: " ", Move: 1}, // Q 0: □ → E (-> states move head to the right)
 				"1": {NextState: "O", Write: " ", Move: 1}, // Q 1: □ → O
 			},
 			// The even state E
@@ -91,18 +91,18 @@ func main() {
 			// elseif the value on the tape is odd move to state O (for Odd)
 			// else the value on the tape is blank write 1 (is even)
 			"E": {
-				"0": {NextState: "E", Write: " ", Move: 1}, // Q 0: □ → E
-				"1": {NextState: "O", Write: " ", Move: 1}, //
-				" ": {NextState: "F", Write: "1", Move: 0},
+				"0": {NextState: "E", Write: " ", Move: 1}, // E 0: □ → E
+				"1": {NextState: "O", Write: " ", Move: 1}, // E 1: □ → O
+				" ": {NextState: "F", Write: "1", Move: 0}, // E □: 1 * F (* states do not move the head)
 			},
 			// The odd state O
 			// if the value on the tape is even move to state 1 (for Even)
 			// elseif the value on the tape is odd move to state O (for Odd)
 			// else the value on the tape is blank write 0 (is odd)
 			"O": {
-				"0": {NextState: "E", Write: " ", Move: 1},
-				"1": {NextState: "O", Write: " ", Move: 1},
-				" ": {NextState: "F", Write: "0", Move: 0},
+				"0": {NextState: "E", Write: " ", Move: 1}, // O 0: □ → E
+				"1": {NextState: "O", Write: " ", Move: 1}, // O 1: □ → O
+				" ": {NextState: "F", Write: "0", Move: 0}, // O □: 0 * F
 			},
 		},
 	}
