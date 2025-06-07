@@ -73,15 +73,32 @@ func main() {
 		Head:  0,
 		State: "Q",
 		Transitions: map[State]map[Symbol]Transition{
+			// This is a simple program to deterimine if provided binary input is even or odd
+			//
+			// The start state Q - probably not required but doesn't make
+			// sense to start at state E (Even) or O (Odd) when it is not
+			// yet determined.
+			//
+			// if the value on the tape is even move to state 1 (for Even)
+			// else the value on the tape is odd move to state O (for Odd)
+			// We don't need to write anything to the tape yet
 			"Q": {
-				"0": {NextState: "E", Write: " ", Move: 1},
-				"1": {NextState: "O", Write: " ", Move: 1},
+				"0": {NextState: "E", Write: " ", Move: 1}, // Q 0: □ → E
+				"1": {NextState: "O", Write: " ", Move: 1}, // Q 1: □ → O
 			},
+			// The even state E
+			// if the value on the tape is even move to state 1 (for Even)
+			// elseif the value on the tape is odd move to state O (for Odd)
+			// else the value on the tape is blank write 1 (is even)
 			"E": {
-				"0": {NextState: "E", Write: " ", Move: 1},
-				"1": {NextState: "O", Write: " ", Move: 1},
+				"0": {NextState: "E", Write: " ", Move: 1}, // Q 0: □ → E
+				"1": {NextState: "O", Write: " ", Move: 1}, //
 				" ": {NextState: "F", Write: "1", Move: 0},
 			},
+			// The odd state O
+			// if the value on the tape is even move to state 1 (for Even)
+			// elseif the value on the tape is odd move to state O (for Odd)
+			// else the value on the tape is blank write 0 (is odd)
 			"O": {
 				"0": {NextState: "E", Write: " ", Move: 1},
 				"1": {NextState: "O", Write: " ", Move: 1},
